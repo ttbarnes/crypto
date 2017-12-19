@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 1em;
   font-size: 1em;
@@ -8,7 +12,39 @@ h1,h2,h3,h4 {
   margin-top: 0;
 }
 
+label {
+  font-size: .9em;
+  display: block;
+  padding-bottom: .5em;
+}
+
 input {
+  width: 100%;
+  padding: .5em;
+  font-size: .9em;
+  margin-bottom: 1em;
+}
+
+@media(min-width: 768px) {
+ .exchange-api-inputs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  } 
+}
+
+.exchange-input-box-container {
   padding: 1em;
-  font-size: 1em;
+}
+
+.exchange-input-box-container-inner {
+  background: #EEE;
+  padding: 1em;
+}
+
+@media(min-width: 768px) {
+  .exchange-input-box-container {
+    width: 50%;
+    max-width: 50%;
+  }
 }
