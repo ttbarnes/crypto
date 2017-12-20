@@ -1,34 +1,42 @@
 import React, { Component } from 'react';
-import './App.css';
 import ExchangeApiInputs from './ExchangeApiInputs';
+import {
+  API_ROOT,
+  API_ROOT_BITTREX,
+  API_ROOT_GDAX
+} from './constants';
+import './App.css';
 
 const EXCHANGES = [
   'Bitfinex',
   'Bittrex',
-  'Test 3',
+  'GDAX',
   'Something 4'
 ];
+
+const isBitfinex = (str) => str === EXCHANGES[0];
+const isBittrex = (str) => str === EXCHANGES[1];
+const isGDAX = (str) => str === EXCHANGES[2];
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       bitfinexData: [],
-      bittrexData: []
+      bittrexData: [],
+      gdaxData: []
     }
   }
 
   getData = (exchange) => {
-    if (exchange.name === EXCHANGES[0]) {
-      const endpoint = `http://localhost:8080/api/poc`
+    const params = {
+      name: exchange.name,
+      secret: exchange.apiSecret,
+      key: exchange.apiKey
+    };
 
-      const params = {
-        name: exchange.name,
-        secret: exchange.apiSecret,
-        key: exchange.apiKey
-      }
-
-      var url = new URL('http://localhost:8080/api/poc'), params;
+    if (isBitfinex(exchange.name)) {
+      const url = new URL(API_ROOT);
       Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
 
       fetch(url).then(res => res.json()).then((data) => {
@@ -36,16 +44,8 @@ class App extends Component {
           bitfinexData: data
         });
       });
-    } else if (exchange.name === EXCHANGES[1]) {
-      const endpoint = `http://localhost:8080/api/poc/bittrex`
-
-      const params = {
-        name: exchange.name,
-        secret: exchange.apiSecret,
-        key: exchange.apiKey
-      }
-
-      var url = new URL('http://localhost:8080/api/poc/bittrex'), params;
+    } else if (isBittrex(exchange.name)) {
+      const url = new URL(API_ROOT_BITTREX);
       Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
 
       fetch(url).then(res => res.json()).then((data) => {
@@ -53,18 +53,29 @@ class App extends Component {
           bittrexData: data
         });
       });
+    } else if (isGDAX(exchange.name)) {
+      const url = new URL(API_ROOT_GDAX);
+      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+      fetch(url).then(res => res.json()).then((data) => {
+        this.setState({
+          gdaxData: data
+        });
+      });
     }
+
   }
 
   render() {
     const {
       bitfinexData,
       bittrexData
+      // gdaxData
     } = this.state;
 
     return (
       <div className="App">
-        <h1>Crypto app</h1>
+        <h1>iCryptoWallet64.js.io</h1>
 
         <div className="balances-input-container">
 
