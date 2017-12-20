@@ -4,7 +4,7 @@ import ExchangeApiInputs from './ExchangeApiInputs';
 
 const EXCHANGES = [
   'Bitfinex',
-  'Exchange 2',
+  'Bittrex',
   'Test 3',
   'Something 4'
 ];
@@ -13,7 +13,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bitfinexData: []
+      bitfinexData: [],
+      bittrexData: []
     }
   }
 
@@ -35,11 +36,31 @@ class App extends Component {
           bitfinexData: data
         });
       });
+    } else if (exchange.name === EXCHANGES[1]) {
+      const endpoint = `http://localhost:8080/api/poc/bittrex`
+
+      const params = {
+        name: exchange.name,
+        secret: exchange.apiSecret,
+        key: exchange.apiKey
+      }
+
+      var url = new URL('http://localhost:8080/api/poc/bittrex'), params;
+      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+      fetch(url).then(res => res.json()).then((data) => {
+        this.setState({
+          bittrexData: data
+        });
+      });
     }
   }
 
   render() {
-    const { bitfinexData } = this.state;
+    const {
+      bitfinexData,
+      bittrexData
+    } = this.state;
 
     return (
       <div className="App">
@@ -71,6 +92,25 @@ class App extends Component {
                 </ul>
               </div>
             ) : null}
+
+            {bittrexData.result ? (
+              <div>
+                <h5>Bittrex Balances</h5>
+                {bittrexData.result === [] &&
+                  <div>0 monies - empty</div>
+                }
+                {(bittrexData && bittrexData.result && bittrexData.result.length) &&
+                  <ul>
+                    {bittrexData.result.map((d) =>
+                      <li key={d.currency}>
+                        <b>{d.currency.toUpperCase()}</b>: {d.amount}
+                      </li>
+                    )}
+                  </ul>
+                }
+              </div>
+            ) : null}
+
           </div>
 
         </div>

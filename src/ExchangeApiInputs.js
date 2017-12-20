@@ -44,6 +44,14 @@ class ExchangeApiInputs extends Component {
     this.props.onSubmitForm(exchangeInState);
   }
 
+  buttonDisabled(name) {
+    if (name === 'Bitfinex' ||
+        name === 'Bittrex') {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     const { exchanges } = this.state;
 
@@ -74,7 +82,7 @@ class ExchangeApiInputs extends Component {
               <button
                 onClick={this.onButtonClick}
                 data-provider={e.name}
-                disabled={e.name !== 'Bitfinex'}
+                disabled={this.buttonDisabled(e.name)}
               >
                 Add
               </button>
