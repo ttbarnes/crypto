@@ -18,11 +18,16 @@ class ExchangeApiInputs extends Component {
       exchanges: exchangesAsObjs
     });
   }
+  
+  getExchangeInState(str) {
+    return this.state.exchanges.find((e) => e.name === str);
+  }
 
   onInputChange = (ev) => {
     const dataKey = ev.target.dataset.key;
     const exchanges = this.state.exchanges;
-    const exchangeInState = exchanges.find((e) => e.name === ev.target.name);
+    const exchangeInState = this.getExchangeInState(ev.target.name);
+
     if (dataKey === 'apiKey') {
       exchangeInState.apiKey = ev.target.value; 
     }
@@ -32,6 +37,11 @@ class ExchangeApiInputs extends Component {
     this.setState({
       exchanges
     });
+  }
+
+  onButtonClick = (ev) => {
+    const exchangeInState = this.getExchangeInState(ev.target.dataset.provider);
+    this.props.onSubmitForm(exchangeInState);
   }
 
   render() {
@@ -61,6 +71,13 @@ class ExchangeApiInputs extends Component {
                 name={e.name}
                 data-key="apiSecret"
               />
+              <button
+                onClick={this.onButtonClick}
+                data-provider={e.name}
+                disabled={e.name !== 'Bitfinex'}
+              >
+                Add
+              </button>
             </div>
           </div>
         )}
