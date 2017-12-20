@@ -45,23 +45,35 @@ class App extends Component {
       <div className="App">
         <h1>Crypto app</h1>
 
-        {bitfinexData.length ? (
-          <div>
-            <h4>Bitfinex Balances</h4>
-            <ul>
-              {bitfinexData.map((d) =>
-                <li key={d.currency}>
-                  <b>{d.currency.toUpperCase()}</b>: {d.amount}
-                </li>
-              )}
-            </ul>
-          </div>
-        ) : null}
+        <div className="balances-input-container">
 
-        <ExchangeApiInputs
-          exchanges={EXCHANGES}
-          onSubmitForm={this.getData}
-        />
+          <div>
+            <ExchangeApiInputs
+              exchanges={EXCHANGES}
+              onSubmitForm={this.getData}
+            />
+          </div>
+
+          <div className="col-right">
+            <h4>Balances</h4>
+
+            {!bitfinexData.length && <p><small>Connect with an exchange to get your balances</small></p>}
+
+            {bitfinexData.length ? (
+              <div>
+                <h5>Bitfinex Balances</h5>
+                <ul>
+                  {bitfinexData.map((d) =>
+                    <li key={d.currency}>
+                      <b>{d.currency.toUpperCase()}</b>: {d.amount}
+                    </li>
+                  )}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+
+        </div>
 
       </div>
     );
