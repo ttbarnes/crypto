@@ -5,7 +5,7 @@ import {
   API_ROOT_BITTREX,
   API_ROOT_GDAX
 } from './constants';
-import './App.css';
+import './Home.css';
 
 const EXCHANGES = [
   'Bitfinex',

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 import './index.css';
 import Home from './Home';
+import MoveFunds from './MoveFunds';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
@@ -18,7 +19,7 @@ ReactDOM.render(
         <div className="main-container">
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path='/move-funds' component={() => <div>test :)</div>} />
+            <Route exact path='/move-funds' component={MoveFunds} />
           </Switch>
         </div>
       </div>
