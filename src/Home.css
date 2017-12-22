@@ -44,6 +44,11 @@ button {
   font-weight: bold;
 }
 
+.button-sm {
+  padding: .2em .5em;
+  font-size: .8em;
+}
+
 button:hover,
 button:focus {
   background: #7be558;

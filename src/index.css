@@ -56,3 +56,29 @@ header li a:hover {
 .main-container {
   margin-top: 3em;
 }
+
+
+.flex-cols-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 2em auto;
+  max-width: 800px;
+}
+
+.flex-cols-container > div {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.flex-cols-container button {
+  margin: 0 auto;
+}
+
+
+.move-funds-summary {
+  padding: 1em;
+  background: #CCC;
+  border: solid 2px #999;
+}

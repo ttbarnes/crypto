@@ -3,16 +3,11 @@ import ExchangeApiInputs from './ExchangeApiInputs';
 import {
   API_ROOT,
   API_ROOT_BITTREX,
-  API_ROOT_GDAX
+  API_ROOT_GDAX,
+  EXCHANGES
 } from './constants';
 import './Home.css';
 
-const EXCHANGES = [
-  'Bitfinex',
-  'Bittrex',
-  'GDAX',
-  'Something 4'
-];
 
 const isBitfinex = (str) => str === EXCHANGES[0];
 const isBittrex = (str) => str === EXCHANGES[1];
