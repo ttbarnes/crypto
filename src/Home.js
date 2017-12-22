@@ -75,7 +75,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>iCryptoWallet64.js.io</h1>
 
         <div className="balances-input-container">
 
