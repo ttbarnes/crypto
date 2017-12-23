@@ -1,35 +1,23 @@
 import React from 'react';
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
-import './index.css';
-import Home from './Home';
-import MoveFunds from './MoveFunds';
-import SignUp from './routes/SignUp/SignUp';
-import registerServiceWorker from './registerServiceWorker';
+import Routes from './routes';
+import appReducer from './reducers';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
+
+const store = createStore(
+  appReducer,
+  composeEnhancers(applyMiddleware(
+    thunk
+  ))
+);
+
+const DOM_ROOT_ID = 'root';
+const GET_DOM_ROOT = document.getElementById(DOM_ROOT_ID);
 
 ReactDOM.render(
-    <BrowserRouter>
-      <div>
-        <header>
-          <div className="col-left">
-            <h1><Link to="/">iCryptoWallet64.js.io</Link></h1>
-            <ul>
-              <li><Link to="/">Balances</Link></li>
-              <li><Link to="move-funds">Move funds</Link></li>
-            </ul>
-          </div>
-          <div className="user-menu">
-            <li><Link to="sign-up">Sign up</Link></li>
-          </div>
-        </header>
-        <div className="main-container">
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/move-funds' component={MoveFunds} />
-            <Route exact path='/sign-up' component={SignUp} />
-          </Switch>
-        </div>
-      </div>
-    </BrowserRouter>, document.getElementById('root'));
-
-registerServiceWorker();
+  <Routes store={store} />,
+  GET_DOM_ROOT
+);
