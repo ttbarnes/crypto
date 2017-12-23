@@ -121,11 +121,16 @@ class MoveFunds extends Component {
               <div>
                 <ul>
                   {fromSelectedWallet.balances.map((b) =>
-                    <li key={b.name} style={{ display: 'flex', margin: '.5em 0' }}>
+                    <li key={b.name}
+                        style={{ display: 'flex', margin: '.5em 0' }}
+                        className={(toSelectedFinal.currency && b.name !== toSelectedFinal.currency) ? 'selected-wallet-list-item-disabled' : ''}
+                    >
                       {b.name}: {b.amount}
                       <button
                         onClick={() => this.onExchangeWalletCurrencySelected(fromSelectedWallet.name, b.name, b.amount, 'from')}
-                        className="button-sm">select</button>
+                        className="button-sm"
+                        disabled={(toSelectedFinal.currency && b.name !== toSelectedFinal.currency)}
+                      >select</button>
                     </li>
                   )}
                 </ul>
@@ -145,11 +150,15 @@ class MoveFunds extends Component {
               <div>
                 <ul>
                   {toSelectedWallet.balances.map((b) =>
-                    <li key={b.name} style={{ display: 'flex', margin: '.5em 0' }}>
+                    <li key={b.name}
+                        style={{ display: 'flex', margin: '.5em 0' }}
+                        className={(fromSelectedFinal.currency && b.name !== fromSelectedFinal.currency) ? 'selected-wallet-list-item-disabled' : ''}>
                       {b.name}: {b.amount}
                       <button
                         onClick={() => this.onExchangeWalletCurrencySelected(toSelectedWallet.name, b.name, b.amount, 'to')}
-                        className="button-sm">select</button>
+                        className="button-sm"
+                        disabled={b.name !== fromSelectedFinal.currency}
+                      >select</button>
                     </li>
                   )}
                 </ul>
@@ -162,17 +171,17 @@ class MoveFunds extends Component {
         {(fromSelectedFinal.amount || toSelectedFinal.amount) &&
           <div className="flex-cols-container move-funds-summary">
             <div>
-              <h4>...Moving{' '}...</h4>
-              {fromSelectedFinal.amount &&
+              <h4>...Moving...</h4>
+              {fromSelectedFinal.wallet &&
                 <div>
                   <p>{fromSelectedFinal.amount} {fromSelectedFinal.currency} from {fromSelectedFinal.wallet}</p>
                 </div>
               }
               {' '}to...{' '}
-              {!toSelectedFinal.amount && <p>please select</p>}
-              {toSelectedFinal.amount &&
+              {!toSelectedFinal.wallet && <p>please select</p>}
+              {toSelectedFinal.wallet &&
                 <div>
-                  <p>{toSelectedFinal.wallet} {toSelectedFinal.currency} wallet.</p>
+                  <p>{toSelectedFinal.wallet} {toSelectedFinal.currency} wallet</p>
                 </div>
               }
               <button>Make it happen</button>

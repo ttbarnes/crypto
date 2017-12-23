@@ -76,9 +76,17 @@ header li a:hover {
   margin: 0 auto;
 }
 
+button:focus {
+  outline: 0 none;
+}
 
 .move-funds-summary {
   padding: 1em;
   background: #CCC;
   border: solid 2px #999;
+}
+
+
+.selected-wallet-list-item-disabled {
+  opacity: .6;
 }
