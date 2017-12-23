@@ -1,110 +1,5 @@
 @import './core.scss';
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  padding: 1em;
-  font-size: 1em;
-  font-weight: 300;
-}
-
-h1,h2,h3,h4 {
-  padding-top: 0;
-  margin-top: 0;
-  font-weight: 500;
-}
-
-h5 {
-  text-decoration: underline;
-}
-
-label {
-  font-size: .9em;
-  display: block;
-  padding-bottom: .5em;
-  color: $color-grey;
-}
-
-input {
-  width: 100%;
-  padding: .5em;
-  font-size: .9em;
-  margin-bottom: 1em;
-  background: none;
-  border: solid 2px $color-black;
-  color: $color-silver;
-  transition: all .2s ease;
-}
-
-.input-on-dark {
-  border: solid 2px $color-black-lighter;
-}
-
-input:focus {
-  outline: solid 1px $color-black;
-}
-
-.input-on-dark:hover {
-  border-color: $color-grey-darker;
-}
-.input-on-dark:focus {
-  outline: solid 1px $color-black-lighter;
-  border-color: $color-grey-darker;
-}
-
-
-button {
-  background: $color-olive;
-  color: #000;
-  padding: .75em 1em;
-  font-size: 1em;
-  font-weight: 500;
-  appearance: none;
-  -webkit-appearance: none;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  border: 0 none;
-  transition: all .15s ease;
-}
-
-.button-sm {
-  padding: .2em .5em;
-  font-size: .8em;
-}
-
-button:hover,
-button:focus {
-  background: $color-green;
-  text-decoration: underline;
-}
-
-@media(min-width: 768px) {
-  button {
-    width: initial;
-    font-size: .9em;
-  }
-}
-
-button[disabled] {
-  opacity: .3;
-  cursor: default;
-}
-
-button[disabled]:hover,
-button[disabled]:focus {
-  background: #51CA29;
-}
-
-button.block {
-  display: block;
-  width: 100%;
-  margin-top: 1em;
-}
-
-
 @media(min-width: 768px) {
  .exchange-api-inputs {
     display: flex;
@@ -132,6 +27,7 @@ button.block {
 .balances-input-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .balances-input-container .col-left {
