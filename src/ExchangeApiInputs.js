@@ -69,6 +69,7 @@ class ExchangeApiInputs extends Component {
                 placeholder="asdfADSFasdfASDFasdfADSFasdfASDF"
                 name={e.name}
                 data-key="apiKey"
+                className="input-on-dark"
               />
 
               <label>API secret</label>
@@ -78,6 +79,7 @@ class ExchangeApiInputs extends Component {
                 placeholder="FDSAfdsaFDSAfdsaFDSAfdsaFDSAfdsa"
                 name={e.name}
                 data-key="apiSecret"
+                className="input-on-dark"
               />
               <button
                 onClick={this.onButtonClick}

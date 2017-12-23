@@ -24,6 +24,7 @@ label {
   font-size: .9em;
   display: block;
   padding-bottom: .5em;
+  color: $color-grey;
 }
 
 input {
@@ -32,8 +33,27 @@ input {
   font-size: .9em;
   margin-bottom: 1em;
   background: none;
+  border: solid 2px $color-black;
+  color: $color-silver;
+  transition: all .2s ease;
+}
+
+.input-on-dark {
   border: solid 2px $color-black-lighter;
 }
+
+input:focus {
+  outline: solid 1px $color-black;
+}
+
+.input-on-dark:hover {
+  border-color: $color-grey-darker;
+}
+.input-on-dark:focus {
+  outline: solid 1px $color-black-lighter;
+  border-color: $color-grey-darker;
+}
+
 
 button {
   background: $color-olive;
@@ -81,6 +101,7 @@ button[disabled]:focus {
 button.block {
   display: block;
   width: 100%;
+  margin-top: 1em;
 }
 
 

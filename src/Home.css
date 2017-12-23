@@ -17,7 +17,8 @@ h5 {
 label {
   font-size: .9em;
   display: block;
-  padding-bottom: .5em; }
+  padding-bottom: .5em;
+  color: #AAA; }
 
 input {
   width: 100%;
@@ -25,7 +26,22 @@ input {
   font-size: .9em;
   margin-bottom: 1em;
   background: none;
+  border: solid 2px #111;
+  color: #DDD;
+  transition: all .2s ease; }
+
+.input-on-dark {
   border: solid 2px #2C2C2C; }
+
+input:focus {
+  outline: solid 1px #111; }
+
+.input-on-dark:hover {
+  border-color: #525252; }
+
+.input-on-dark:focus {
+  outline: solid 1px #2C2C2C;
+  border-color: #525252; }
 
 button {
   background: #3D9970;
@@ -65,7 +81,8 @@ button[disabled]:focus {
 
 button.block {
   display: block;
-  width: 100%; }
+  width: 100%;
+  margin-top: 1em; }
 
 @media (min-width: 768px) {
   .exchange-api-inputs {
