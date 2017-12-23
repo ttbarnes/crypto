@@ -18,12 +18,17 @@ header {
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  justify-content: space-between;
 }
 
 header h1 {
   margin-right: 1em;
   margin-bottom: 0;
-  font-size: 1.2em;
+  opacity: .4;
+  font: {
+    size: 1.2em;
+    weight: 300;
+  }
 }
 
 header h1 a {
@@ -53,6 +58,10 @@ header li a {
 
 header li a:hover {
   text-decoration: underline;
+}
+
+header .col-left {
+  display: flex;
 }
 
 .main-container {
