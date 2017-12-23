@@ -184,7 +184,10 @@ class MoveFunds extends Component {
                   <p>{toSelectedFinal.wallet} {toSelectedFinal.currency} wallet</p>
                 </div>
               }
-              <button className="block">Make it happen</button>
+              <button
+                className="block"
+                disabled={!fromSelectedFinal.currency || !toSelectedFinal.currency}
+              >Make it happen</button>
             </div>
           </div>
         }

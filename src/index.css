@@ -68,8 +68,7 @@ button:focus {
 
 .move-funds-summary {
   padding: 1em;
-  background: #111;
-  border: solid 2px #464646; }
+  background: #111; }
   .move-funds-summary > div {
     width: 100%; }
 
