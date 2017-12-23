@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   API_BASE,
   USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_ERROR
+  USER_SIGNUP_ERROR,
+  DESTORY_USER_SIGNUP_SUCCESS
 } from '../constants';
 
 export function signupSuccess() {
@@ -17,6 +18,14 @@ export function signupError(err) {
     payload: err
   }
 }
+
+export function destroyUserSignupSuccess() {
+  return {
+    type: DESTORY_USER_SIGNUP_SUCCESS,
+    payload: false
+  }
+}
+
 export const userSignup = () => {
   return (dispatch, getState) => {
     const userObj = () => {

@@ -1,48 +1,49 @@
 import React, { Component, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { userSignup } from '../../actions';
+import {
+  userSignup,
+  destroyUserSignupSuccess
+} from '../../actions';
+import IMAGE_AWESOME from '../../images/awesome.png';
 
 class SignUpForm extends Component {
   render() {
     return (
-      <div className="flex-container-center signup-form-container">
-        <div className="signup-form">
-          <form onSubmit={(e) => e.preventDefault()}>
+      <div className="signup-form">
+        <form onSubmit={(e) => e.preventDefault()}>
 
-            <div>
-              <label htmlFor="username">Username</label>
-              <Field
-                name="username"
-                component="input"
-                type="text"
-                className="input-on-dark"
-              />
-            </div>
+          <div>
+            <label htmlFor="username">Username</label>
+            <Field
+              name="username"
+              component="input"
+              type="text"
+              className="input-on-dark"
+            />
+          </div>
 
-            <div>
-              <label htmlFor="username">Password</label>
-              <Field
-                name="password"
-                component="input"
-                type="password"
-                className="input-on-dark"
-              />
-            </div>
+          <div>
+            <label htmlFor="username">Password</label>
+            <Field
+              name="password"
+              component="input"
+              type="password"
+              className="input-on-dark"
+            />
+          </div>
 
-            <button
-              type="submit"
-              onClick={this.props.onSubmit}
-              className="block"
-            >Sign up
-            </button>
+          <button
+            type="submit"
+            onClick={this.props.onSubmit}
+            className="block"
+          >Sign up
+          </button>
 
-          </form>
-        </div>
+        </form>
       </div>
     )
   }
-
 }
 
 const SignUpReduxForm = reduxForm({
@@ -50,19 +51,44 @@ const SignUpReduxForm = reduxForm({
 })(SignUpForm)
 
 class SignUp extends PureComponent {
+
+  componentWillUnmount(){
+    this.props.destroySignupSuccess()
+  }
   render() {
-    const { onSubmitForm } = this.props;
+    const {
+      onSubmitForm,
+      signupSuccess
+    } = this.props;
+
     return (
-      <SignUpReduxForm onSubmit={onSubmitForm} />
+      <div className="flex-container-center signup-form-container">
+        {signupSuccess &&
+          <div className="signup-success-message">
+            <p>Signup Success!</p>
+            <img src={IMAGE_AWESOME} alt="Success" />
+          </div>
+        }
+        {!signupSuccess &&
+          <SignUpReduxForm onSubmit={onSubmitForm} />
+        }
+      </div>
     )
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    signupSuccess: state.user && state.user.signupSuccess
+  }
+}
+
 const mapDispatchToProps = {
-  onSubmitForm: () => userSignup()
+  onSubmitForm: () => userSignup(),
+  destroySignupSuccess: () => destroyUserSignupSuccess()
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignUp);

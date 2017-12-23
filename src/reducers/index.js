@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import {
   USER_SET_AUTH,
-  USER_SIGNUP_SUCCESS
+  USER_SIGNUP_SUCCESS,
+  DESTORY_USER_SIGNUP_SUCCESS
 } from '../constants';
 
 const initialState = {
@@ -25,6 +26,10 @@ const userReducer = (state, action) => {
     case USER_SIGNUP_SUCCESS:
       return Object.assign({}, state, {
         signupSuccess: true
+      });
+    case DESTORY_USER_SIGNUP_SUCCESS:
+      return Object.assign({}, state, {
+        signupSuccess: false
       });
     default:
       return state;

@@ -3,7 +3,8 @@
 html,
 body,
 .root,
-.root > div {
+.root > div,
+.main-container > div {
   width: 100%;
   height: 100%;
 }
@@ -134,4 +135,18 @@ button:focus {
   margin-top: -6em;
   width: 100%;
   background: $color-black;
+}
+
+.signup-success-message {
+  text-align: center;
+  width: 100%;
+}
+
+.signup-success-message img {
+  max-width: 200px;
+}
+.signup-success-message p {
+  background: $color-olive;
+  color: #FFF;
+  padding: 1em;
 }
