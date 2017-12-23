@@ -1,23 +1,30 @@
+@import './core.scss';
+
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 body {
   padding: 1em;
   font-size: 1em;
-  font-weight: 300; }
+  font-weight: 300;
+}
 
-h1, h2, h3, h4 {
+h1,h2,h3,h4 {
   padding-top: 0;
   margin-top: 0;
-  font-weight: 500; }
+  font-weight: 500;
+}
 
 h5 {
-  text-decoration: underline; }
+  text-decoration: underline;
+}
 
 label {
   font-size: .9em;
   display: block;
-  padding-bottom: .5em; }
+  padding-bottom: .5em;
+}
 
 input {
   width: 100%;
@@ -25,10 +32,11 @@ input {
   font-size: .9em;
   margin-bottom: 1em;
   background: none;
-  border: solid 2px #2C2C2C; }
+  border: solid 2px $color-black-lighter;
+}
 
 button {
-  background: #3D9970;
+  background: $color-olive;
   color: #000;
   padding: .75em 1em;
   font-size: 1em;
@@ -39,61 +47,79 @@ button {
   width: 100%;
   cursor: pointer;
   border: 0 none;
-  transition: all .15s ease; }
+  transition: all .15s ease;
+}
 
 .button-sm {
   padding: .2em .5em;
-  font-size: .8em; }
+  font-size: .8em;
+}
 
 button:hover,
 button:focus {
-  background: #2ECC40;
-  text-decoration: underline; }
+  background: $color-green;
+  text-decoration: underline;
+}
 
-@media (min-width: 768px) {
+@media(min-width: 768px) {
   button {
     width: initial;
-    font-size: .9em; } }
+    font-size: .9em;
+  }
+}
 
 button[disabled] {
   opacity: .3;
-  cursor: default; }
+  cursor: default;
+}
 
 button[disabled]:hover,
 button[disabled]:focus {
-  background: #51CA29; }
+  background: #51CA29;
+}
 
 button.block {
   display: block;
-  width: 100%; }
+  width: 100%;
+}
 
-@media (min-width: 768px) {
-  .exchange-api-inputs {
+
+@media(min-width: 768px) {
+ .exchange-api-inputs {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; } }
+    flex-wrap: wrap;
+  } 
+}
 
 .exchange-input-box-container {
-  padding: 1em; }
+  padding: 1em;
+}
 
 .exchange-input-box-container-inner {
-  background: #111;
-  padding: 1em; }
+  background: $color-black;
+  padding: 1em;
+}
 
-@media (min-width: 768px) {
+@media(min-width: 768px) {
   .exchange-input-box-container {
     width: 50%;
-    max-width: 50%; } }
+    max-width: 50%;
+  }
+}
 
 .balances-input-container {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+}
 
 .balances-input-container .col-left {
-  width: 80%; }
+  width: 80%;
+}
 
 .balances-input-container .col-right {
-  background: #111;
+  background: $color-black;
   padding: 1em;
   margin-top: 1em;
-  width: 20%; }
+  width: 20%;
+}

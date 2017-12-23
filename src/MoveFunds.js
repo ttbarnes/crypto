@@ -184,7 +184,7 @@ class MoveFunds extends Component {
                   <p>{toSelectedFinal.wallet} {toSelectedFinal.currency} wallet</p>
                 </div>
               }
-              <button>Make it happen</button>
+              <button className="block">Make it happen</button>
             </div>
           </div>
         }
