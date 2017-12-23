@@ -5,7 +5,7 @@ import {
   API_ROOT_BITTREX,
   API_ROOT_GDAX,
   EXCHANGES
-} from './constants';
+} from '../../constants';
 import './Home.css';
 
 
@@ -13,7 +13,7 @@ const isBitfinex = (str) => str === EXCHANGES[0];
 const isBittrex = (str) => str === EXCHANGES[1];
 const isGDAX = (str) => str === EXCHANGES[2];
 
-class App extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -125,4 +125,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;

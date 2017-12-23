@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import Home from './Home';
-import MoveFunds from './MoveFunds';
-import SignUp from './routes/SignUp/SignUp';
+import Home from './routes/Home';
+import MoveFunds from './routes/MoveFunds';
+import SignUp from './routes/SignUp';
 import './index.css';
 
 const Router = () => (

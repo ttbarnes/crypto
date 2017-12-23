@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EXCHANGES } from './constants';
+import { EXCHANGES } from '../../constants';
 
 let MOCK_EXCHANGES_WITH_BALANCES = [];
 
