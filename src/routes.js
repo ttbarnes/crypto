@@ -8,6 +8,9 @@ import MoveFunds from './routes/MoveFunds';
 import SignUp from './routes/SignUp';
 import './index.css';
 
+// for protected auth routes see
+// https://reacttraining.com/react-router/web/example/auth-workflow 
+
 const Router = () => (
   <BrowserRouter>
     <div>

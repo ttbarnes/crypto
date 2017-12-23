@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import { authCheck } from '../../actions';
 import './header.css';
 
 class Header extends Component {
@@ -10,6 +11,14 @@ class Header extends Component {
     this.state = {
       showDropDown: false
     };
+  }
+  componentWillMount() {
+    this.props.doAuthCheck();
+  }
+  componentWillReceiveProps(props) {
+    if (props.isAuth) {
+      // TODO: get user info
+    }
   }
   onToggle = () => {
     this.setState({
@@ -63,7 +72,11 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = {
+  doAuthCheck: () => authCheck()
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Header);

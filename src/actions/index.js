@@ -41,6 +41,19 @@ export function destroyUserSignupSuccess() {
   }
 }
 
+export const authCheck = () => {
+  return (dispatch, getState) => {
+    const token = localStorage.getItem('token');
+    if (token && token !== 'undefined') {
+      // TODO: api check token
+      dispatch(setUserAuth(true));
+    } else {
+      // not auth
+      dispatch(setUserAuth(false));
+    }
+  };
+}
+
 export const userSignup = () => {
   return (dispatch, getState) => {
     const userObj = () => {
