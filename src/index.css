@@ -172,3 +172,7 @@ button:focus,
   background: #3D9970;
   color: #FFF;
   padding: 1em; }
+
+.form-error {
+  color: #FF4136;
+  padding: .5em; }

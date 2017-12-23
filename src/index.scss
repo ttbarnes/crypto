@@ -204,8 +204,14 @@ button:focus,
 .signup-success-message img {
   max-width: 200px;
 }
+
 .signup-success-message p {
   background: $color-olive;
   color: #FFF;
   padding: 1em;
+}
+
+.form-error {
+  color: $color-red;
+  padding: .5em;
 }
