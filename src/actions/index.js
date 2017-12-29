@@ -5,7 +5,9 @@ import {
   USER_SIGNUP_SUCCESS,
   USER_LOGIN_SUCCESS,
   DESTORY_USER_SIGNUP_SUCCESS,
-  USER_AUTH_ERROR
+  USER_AUTH_ERROR,
+  USER_DATA_SUCCESS,
+  USER_DATA_ERROR
 } from '../constants';
 
 export function signupSuccess() {
@@ -38,6 +40,19 @@ export function destroyUserSignupSuccess() {
   return {
     type: DESTORY_USER_SIGNUP_SUCCESS,
     payload: false
+  }
+}
+
+export function userDataSuccess(payload) {
+  return {
+    type: USER_DATA_SUCCESS,
+    payload
+  }
+}
+
+export function userDataError() {
+  return {
+    type: USER_DATA_ERROR
   }
 }
 
@@ -84,6 +99,25 @@ export const userSignup = () => {
   }
 }
 
+export const getUserData = (dispatch) => {
+  return axios.create({
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('token')
+    }
+  }).post(
+    `${API_BASE}/auth`
+  ).then((res) => {
+    if (res.data && res.data.success === true) {
+      dispatch(userDataSuccess(res.data.resUserObj)); 
+    } else {
+      dispatch(userDataError());
+    }
+  }, () => {
+    dispatch(userDataError());
+  });
+}
+
 export const userLogin = () => {
   return (dispatch, getState) => {
     dispatch(setUserAuth(false));
@@ -108,7 +142,8 @@ export const userLogin = () => {
         if (data && data.data.success === true) {
           localStorage.setItem('token', data.data.token);
           dispatch(setUserAuth(true));
-          dispatch(loginSuccess());
+          dispatch(loginSuccess()); // TODO: observables login success
+          getUserData(dispatch);
         } else {
           localStorage.removeItem('token');
           dispatch(authError('Something is wrong'));

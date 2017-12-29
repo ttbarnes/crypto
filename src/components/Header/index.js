@@ -12,22 +12,21 @@ class Header extends Component {
       showDropDown: false
     };
   }
+
   componentWillMount() {
     this.props.doAuthCheck();
   }
-  componentWillReceiveProps(props) {
-    if (props.isAuth) {
-      // TODO: get user info
-    }
-  }
+
   onToggle = () => {
     this.setState({
       showDropDown: !this.state.showDropDown
     })
   }
+
   render() {
     const {
-      isAuth
+      isAuth,
+      profile
     } = this.props;
 
     const {
@@ -45,7 +44,12 @@ class Header extends Component {
         </div>
         <div className="user-menu">
           {isAuth ?
-            <div>user menu</div>
+            <div>
+              {(profile && profile.username) ?
+                <span>{profile.username}</span>
+              : <span>username here</span>
+              }
+            </div>
           :
             <div>
               <li><Link to="sign-up" className="button">Sign up</Link></li>
@@ -68,7 +72,8 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.user && state.user.isAuth
+    isAuth: state.user && state.user.isAuth,
+    profile: state.user && state.user.profile
   }
 }
 

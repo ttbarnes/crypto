@@ -3,14 +3,17 @@ import {
   USER_SIGNUP_SUCCESS,
   DESTORY_USER_SIGNUP_SUCCESS,
   USER_LOGIN_SUCCESS,
-  USER_AUTH_ERROR
+  USER_AUTH_ERROR,
+  USER_DATA_SUCCESS,
+  USER_DATA_ERROR
 } from '../constants';
 
 const initialState = {
   user: {
     isAuth: false,
     signupSuccess: false,
-    authError: null
+    authError: null,
+    profile: {}
   }
 };
 
@@ -21,9 +24,10 @@ const userReducer = (state, action) => {
 
   switch (action.type) {
     case USER_SET_AUTH:
-      return Object.assign({}, state, {
+      return  {
+        ...state,
         isAuth: action.payload
-      });
+      }
     case USER_AUTH_ERROR:
       return {
         ...state,
@@ -44,6 +48,16 @@ const userReducer = (state, action) => {
       return Object.assign({}, state, {
         signupSuccess: false
       });
+    case USER_DATA_SUCCESS:
+      return {
+        ...state,
+        profile: action.payload
+      }
+    case USER_DATA_ERROR:
+      return {
+        ...state,
+        profile: false
+      }
     default:
       return state;
   }
