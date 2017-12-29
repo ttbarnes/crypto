@@ -20,6 +20,7 @@ class SignUpForm extends Component {
               component="input"
               type="text"
               className="input-on-dark"
+              autoComplete="username"
             />
           </div>
 
@@ -30,6 +31,7 @@ class SignUpForm extends Component {
               component="input"
               type="password"
               className="input-on-dark"
+              autoComplete="new-password"
             />
           </div>
 

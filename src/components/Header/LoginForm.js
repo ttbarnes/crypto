@@ -24,6 +24,7 @@ class LoginForm extends Component {
               type="text"
               className="input-on-dark"
               placeholder="Nathan Fielder"
+              autoComplete="username"
             />
           </div>
 
@@ -35,6 +36,7 @@ class LoginForm extends Component {
               type="password"
               className="input-on-dark"
               placeholder="**************"
+              autoComplete="current-password"
             />
           </div>
 
