@@ -9,12 +9,10 @@ import {
 } from '../constants';
 
 const initialState = {
-  user: {
-    isAuth: false,
-    signupSuccess: false,
-    authError: null,
-    profile: {}
-  }
+  isAuth: false,
+  signupSuccess: false,
+  authError: null,
+  profile: {}
 };
 
 const userReducer = (state, action) => {
