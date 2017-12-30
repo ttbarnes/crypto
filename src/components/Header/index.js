@@ -38,6 +38,7 @@ class Header extends Component {
         <div className="col-left">
           <h1><Link to="/">iCryptoWallet64.js.io</Link></h1>
           <ul>
+            <li><Link to="integrations">Integrations</Link></li>
             <li><Link to="/">Balances</Link></li>
             <li><Link to="move-funds">Move funds</Link></li>
           </ul>
