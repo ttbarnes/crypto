@@ -87,6 +87,7 @@ export const authCheck = () => {
     const token = localStorage.getItem('token');
     if (token && token !== 'undefined') {
       // TODO: api check token
+      getUserData(dispatch);
       dispatch(setUserAuth(true));
     } else {
       // not auth

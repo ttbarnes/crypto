@@ -44,12 +44,7 @@ class Header extends Component {
         </div>
         <div className="user-menu">
           {isAuth ?
-            <div>
-              {(profile && profile.username) ?
-                <span>{profile.username}</span>
-              : <span>username here</span>
-              }
-            </div>
+            <small>Welcome {profile.username}</small>
           :
             <div>
               <li><Link to="sign-up" className="button">Sign up</Link></li>
