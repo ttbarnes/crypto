@@ -7,7 +7,10 @@ import {
   DESTORY_USER_SIGNUP_SUCCESS,
   USER_AUTH_ERROR,
   USER_DATA_SUCCESS,
-  USER_DATA_ERROR
+  USER_DATA_ERROR,
+  PROMISE_EXCHANGE_LOADING,
+  PROMISE_EXCHANGE_SUCCESS,
+  PROMISE_EXCHANGE_ERROR
 } from '../constants';
 
 export function signupSuccess() {
@@ -55,6 +58,29 @@ export function userDataError() {
     type: USER_DATA_ERROR
   }
 }
+
+// uiState related promise actions
+export function promiseExchangeLoading(payload) {
+  return {
+    type: PROMISE_EXCHANGE_LOADING,
+    payload
+  }
+}
+
+export function promiseExchangeSuccess(payload) {
+  return {
+    type: PROMISE_EXCHANGE_SUCCESS,
+    payload
+  }
+}
+
+export function promiseExchangeError(payload) {
+  return {
+    type: PROMISE_EXCHANGE_ERROR,
+    payload
+  }
+}
+
 
 export const authCheck = () => {
   return (dispatch, getState) => {
@@ -152,4 +178,28 @@ export const userLogin = () => {
         dispatch(authError('Something is wrong'));
       });
   }
+}
+
+export const postExchangeData = (postObj) => {
+  return (dispatch, getState) => {
+    // 
+    dispatch(promiseExchangeLoading({
+      isLoading: true,
+      exchange: postObj.exchange
+    }));
+    postObj.userId = getState().user.profile._id;
+    return axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    }).put(
+      `${API_BASE}/poc/keys`,
+      postObj
+      ).then((data) => {
+        console.log('------------ postExchangeData data ', data);
+      }, () => {
+        console.log('------------ postExchangeData, something went wrong');
+      });
+  };
 }

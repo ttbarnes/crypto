@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ExchangeApiInputs from './ExchangeApiInputs';
+import { postExchangeData } from '../../actions';
 import {
-  API_ROOT,
-  API_ROOT_BITTREX,
-  API_ROOT_GDAX,
+  // API_ROOT,
+  // API_ROOT_BITTREX,
+  // API_ROOT_GDAX,
   EXCHANGES
 } from '../../constants';
 import './Home.css';
-
 
 const isBitfinex = (str) => str === EXCHANGES[0];
 const isBittrex = (str) => str === EXCHANGES[1];
 const isGDAX = (str) => str === EXCHANGES[2];
 
-class Home extends Component {
+class HomeView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +24,8 @@ class Home extends Component {
     }
   }
 
-  getData = (exchange) => {
+  /*
+  getExchangeData = (exchange) => {
     const params = {
       name: exchange.name,
       secret: exchange.apiSecret,
@@ -58,14 +60,19 @@ class Home extends Component {
         });
       });
     }
+  }
+  */
 
+  onPostExchangeData = (exchange) => {
+    console.log('postExchangeData: ', exchange);
+    this.props.onSubmitExchange(exchange);
   }
 
   render() {
+    const { exchangePromise } = this.props;
     const {
       bitfinexData,
       bittrexData
-      // gdaxData
     } = this.state;
 
     return (
@@ -76,7 +83,8 @@ class Home extends Component {
           <div>
             <ExchangeApiInputs
               exchanges={EXCHANGES}
-              onSubmitForm={this.getData}
+              onSubmitForm={this.onPostExchangeData}
+              exchangePromise={exchangePromise}
             />
           </div>
 
@@ -125,4 +133,17 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    exchangePromise: state.uiState.exchangePromise 
+  }
+}
+
+const mapDispatchToProps = {
+  onSubmitExchange: (exchange) => postExchangeData(exchange)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeView);

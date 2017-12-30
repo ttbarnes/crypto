@@ -12,7 +12,7 @@ class ExchangeApiInputs extends Component {
     const { exchanges } = this.props;
     let exchangesAsObjs = [];
     exchanges.map((e) =>
-      exchangesAsObjs = [...exchangesAsObjs, { name: e}]
+      exchangesAsObjs = [...exchangesAsObjs, { exchange: e}]
     );
     this.setState({
       exchanges: exchangesAsObjs
@@ -20,7 +20,7 @@ class ExchangeApiInputs extends Component {
   }
   
   getExchangeInState(str) {
-    return this.state.exchanges.find((e) => e.name === str);
+    return this.state.exchanges.find((e) => e.exchange === str);
   }
 
   onInputChange = (ev) => {
@@ -40,54 +40,67 @@ class ExchangeApiInputs extends Component {
   }
 
   onButtonClick = (ev) => {
-    const exchangeInState = this.getExchangeInState(ev.target.dataset.provider);
-    this.props.onSubmitForm(exchangeInState);
+    ev.preventDefault();
+    const exchange = this.getExchangeInState(ev.target.dataset.provider);
+    this.props.onSubmitForm(exchange);
   }
 
-  buttonDisabled(name) {
-    if (name === 'Bitfinex' ||
-        name === 'Bittrex') {
+  buttonDisabled(exchange) {
+    if (exchange === 'Bitfinex' ||
+      exchange === 'Bittrex') {
       return false;
     }
     return true;
   }
 
   render() {
+    const { exchangePromise } = this.props;
     const { exchanges } = this.state;
 
     return (
       <div className="exchange-api-inputs">
+
         {exchanges.map((e) =>
-          <div key={e.name} className="exchange-input-box-container">
+          <div key={e.exchange} className="exchange-input-box-container">
             <div className="exchange-input-box-container-inner">
-              <h3>{e.name}</h3>
 
-              <label>API key</label>
-              <input
-                type="text"
-                onChange={this.onInputChange}
-                placeholder="asdfADSFasdfASDFasdfADSFasdfASDF"
-                name={e.name}
-                data-key="apiKey"
-                className="input-on-dark"
-              />
+              {(exchangePromise && exchangePromise.exchange == e.exchange) &&
+                <div>
+                  {exchangePromise.isLoading && <p>LOADING</p>}
+                  {exchangePromise.hasError && <p>Error :(</p>}
+                  {exchangePromise.isSuccess && <p>Success!</p>}
+                </div>
+              }
 
-              <label>API secret</label>
-              <input
-                type="text"
-                onChange={this.onInputChange}
-                placeholder="FDSAfdsaFDSAfdsaFDSAfdsaFDSAfdsa"
-                name={e.name}
-                data-key="apiSecret"
-                className="input-on-dark"
-              />
-              <button
-                onClick={this.onButtonClick}
-                data-provider={e.name}
-                disabled={this.buttonDisabled(e.name)}
-              >
-                Add
-              </button>
+              <h3>{e.exchange}</h3>
+              <form onSubmit={(ev) => this.onButtonClick(ev)}>
+                <label>API key</label>
+                <input
+                  type="text"
+                  onChange={this.onInputChange}
+                  placeholder="asdfADSFasdfASDFasdfADSFasdfASDF"
+                  name={e.exchange}
+                  data-key="apiKey"
+                  className="input-on-dark"
+                />
+
+                <label>API secret</label>
+                <input
+                  type="text"
+                  onChange={this.onInputChange}
+                  placeholder="FDSAfdsaFDSAfdsaFDSAfdsaFDSAfdsa"
+                  name={e.exchange}
+                  data-key="apiSecret"
+                  className="input-on-dark"
+                />
+                <button
+                  onClick={this.onButtonClick}
+                  data-provider={e.exchange}
+                  disabled={this.buttonDisabled(e.exchange)}
+                >
+                  Add
+                </button>
+              </form>
             </div>
           </div>
         )}
