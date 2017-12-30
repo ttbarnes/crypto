@@ -5,7 +5,7 @@ export const API_ROOT_BITTREX = `${API_ROOT}/bittrex`;
 export const API_ROOT_GDAX = `${API_ROOT}/gdax`;
 
 // dummy data / config
-export const EXCHANGES = [
+export const POSSIBLE_EXCHANGES = [
   'Bitfinex',
   'Bittrex',
   'GDAX',

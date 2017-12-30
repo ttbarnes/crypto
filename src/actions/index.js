@@ -183,7 +183,10 @@ export const userLogin = () => {
 
 export const postExchangeData = (postObj) => {
   return (dispatch, getState) => {
-    // 
+    dispatch(promiseExchangeError({
+      hasError: false,
+      exchange: postObj.exchange
+    }));
     dispatch(promiseExchangeLoading({
       isLoading: true,
       exchange: postObj.exchange
@@ -198,9 +201,24 @@ export const postExchangeData = (postObj) => {
       `${API_BASE}/poc/keys`,
       postObj
       ).then((data) => {
-        console.log('------------ postExchangeData data ', data);
+        dispatch(promiseExchangeLoading({
+          isLoading: false,
+          exchange: postObj.exchange
+        }));
+        dispatch(promiseExchangeSuccess({
+          isLoading: false,
+          isSuccess: true,
+          exchange: postObj.exchange
+        }));
       }, () => {
-        console.log('------------ postExchangeData, something went wrong');
+        dispatch(promiseExchangeLoading({
+          isLoading: false,
+          exchange: postObj.exchange
+        }));
+        dispatch(promiseExchangeError({
+          hasError: true,
+          exchange: postObj.exchange
+        }));
       });
   };
 }

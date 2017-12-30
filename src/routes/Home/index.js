@@ -6,13 +6,13 @@ import {
   // API_ROOT,
   // API_ROOT_BITTREX,
   // API_ROOT_GDAX,
-  EXCHANGES
+  POSSIBLE_EXCHANGES
 } from '../../constants';
 import './Home.css';
 
-const isBitfinex = (str) => str === EXCHANGES[0];
-const isBittrex = (str) => str === EXCHANGES[1];
-const isGDAX = (str) => str === EXCHANGES[2];
+const isBitfinex = (str) => str === POSSIBLE_EXCHANGES[0];
+const isBittrex = (str) => str === POSSIBLE_EXCHANGES[1];
+const isGDAX = (str) => str === POSSIBLE_EXCHANGES[2];
 
 class HomeView extends Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class HomeView extends Component {
 
           <div>
             <ExchangeApiInputs
-              exchanges={EXCHANGES}
+              exchanges={POSSIBLE_EXCHANGES}
               onSubmitForm={this.onPostExchangeData}
               exchangePromise={exchangePromise}
             />

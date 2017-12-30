@@ -34,6 +34,7 @@ const uiStateReducer = (state, action) => {
         exchangePromise: {
           ...state.exchangePromise,
           isLoading: false,
+          exchange: action.payload.exchange,
           isSuccess: action.payload.isSuccess
         }
       }
@@ -43,7 +44,8 @@ const uiStateReducer = (state, action) => {
         exchangePromise: {
           ...state.exchangePromise,
           isLoading: false,
-          hasError: action.payload
+          exchange: action.payload.exchange,
+          hasError: action.payload.hasError
         }
       }
     default:

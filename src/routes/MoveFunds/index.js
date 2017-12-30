@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { EXCHANGES } from '../../constants';
+import { POSSIBLE_EXCHANGES } from '../../constants';
 
 let MOCK_EXCHANGES_WITH_BALANCES = [];
 
-EXCHANGES.map((e) => {
+POSSIBLE_EXCHANGES.map((e) => {
   const newObj = {
     name: e,
     balances: [

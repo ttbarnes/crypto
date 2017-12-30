@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ExchangeApiInputs extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class ExchangeApiInputs extends Component {
       exchanges: exchangesAsObjs
     });
   }
-  
+
   getExchangeInState(str) {
     return this.state.exchanges.find((e) => e.exchange === str);
   }
@@ -53,18 +54,42 @@ class ExchangeApiInputs extends Component {
     return true;
   }
 
+  getUserExchange(name) {
+    const { userExchanges } = this.props;
+    return userExchanges.find(e => e.exchange === name);
+  }
+
+  userExchangeExists(exchangeName) {
+    const { userExchanges } = this.props;
+    if (
+      (userExchanges && userExchanges.length) &&
+      this.getUserExchange(exchangeName)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const { exchangePromise } = this.props;
-    const { exchanges } = this.state;
+    const {
+      exchangePromise,
+      userExchanges
+    } = this.props;
+
+    const {
+      exchanges
+    } = this.state;
+
+    if (!userExchanges) { return null; }
 
     return (
       <div className="exchange-api-inputs">
 
-        {exchanges.map((e) =>
+        {exchanges.map((e) => 
           <div key={e.exchange} className="exchange-input-box-container">
             <div className="exchange-input-box-container-inner">
 
-              {(exchangePromise && exchangePromise.exchange == e.exchange) &&
+              {(exchangePromise && exchangePromise.exchange === e.exchange) &&
                 <div>
                   {exchangePromise.isLoading && <p>LOADING</p>}
                   {exchangePromise.hasError && <p>Error :(</p>}
@@ -73,34 +98,45 @@ class ExchangeApiInputs extends Component {
               }
 
               <h3>{e.exchange}</h3>
-              <form onSubmit={(ev) => this.onButtonClick(ev)}>
-                <label>API key</label>
-                <input
-                  type="text"
-                  onChange={this.onInputChange}
-                  placeholder="asdfADSFasdfASDFasdfADSFasdfASDF"
-                  name={e.exchange}
-                  data-key="apiKey"
-                  className="input-on-dark"
-                />
 
-                <label>API secret</label>
-                <input
-                  type="text"
-                  onChange={this.onInputChange}
-                  placeholder="FDSAfdsaFDSAfdsaFDSAfdsaFDSAfdsa"
-                  name={e.exchange}
-                  data-key="apiSecret"
-                  className="input-on-dark"
-                />
-                <button
-                  onClick={this.onButtonClick}
-                  data-provider={e.exchange}
-                  disabled={this.buttonDisabled(e.exchange)}
-                >
-                  Add
+              {this.userExchangeExists(e.exchange) ? 
+                <div>
+                  <p>Already integrated, awesome! 😊 🎉</p>
+                  <p style={{ opacity: ".5" }}><small>API key: {this.getUserExchange(e.exchange).key}</small></p>
+                  <p style={{ opacity: ".5" }}><small>API secret: {this.getUserExchange(e.exchange).secret}</small></p>
+                </div>
+              :
+                <div>
+                  <form onSubmit={ev => this.onButtonClick(ev)}>
+                    <label>API key</label>
+                    <input
+                      type="text"
+                      onChange={this.onInputChange}
+                      placeholder="asdfADSFasdfASDFasdfADSFasdfASDF"
+                      name={e.exchange}
+                      data-key="apiKey"
+                      className="input-on-dark"
+                    />
+
+                    <label>API secret</label>
+                    <input
+                      type="text"
+                      onChange={this.onInputChange}
+                      placeholder="FDSAfdsaFDSAfdsaFDSAfdsaFDSAfdsa"
+                      name={e.exchange}
+                      data-key="apiSecret"
+                      className="input-on-dark"
+                    />
+                    <button
+                      onClick={this.onButtonClick}
+                      data-provider={e.exchange}
+                      disabled={this.buttonDisabled(e.exchange)}
+                    >
+                      Add
                 </button>
-              </form>
+                  </form>
+                </div>
+              }
             </div>
           </div>
         )}
@@ -109,4 +145,13 @@ class ExchangeApiInputs extends Component {
   }
 }
 
-export default ExchangeApiInputs;
+const mapStateToProps = (state) => {
+  return {
+    userExchanges: state.user.profile.keys
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(ExchangeApiInputs);
