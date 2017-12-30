@@ -39,7 +39,7 @@ class Header extends Component {
           <h1><Link to="/">iCryptoWallet64.js.io</Link></h1>
           <ul>
             <li><Link to="integrations">Integrations</Link></li>
-            <li><Link to="/">Balances</Link></li>
+            <li><Link to="/balances">Balances</Link></li>
             <li><Link to="move-funds">Move funds</Link></li>
           </ul>
         </div>

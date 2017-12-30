@@ -44,21 +44,3 @@
     bottom: 0;
   }
 }
-
-.balances-input-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding-right: 1em;
-}
-
-.balances-input-container .col-left {
-  width: 80%;
-}
-
-.balances-input-container .col-right {
-  background: $color-black;
-  padding: 1em;
-  margin-top: 1em;
-  width: 20%;
-}

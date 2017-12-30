@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './routes/Home';
 import Integrations from './routes/Integrations';
+import Balances from './routes/Balances';
 import MoveFunds from './routes/MoveFunds';
 import SignUp from './routes/SignUp';
 import './index.css';
@@ -20,6 +21,7 @@ const Router = () => (
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/integrations' component={Integrations} />
+          <Route exact path='/balances' component={Balances} />
           <Route exact path='/move-funds' component={MoveFunds} />
           <Route exact path='/sign-up' component={SignUp} />
         </Switch>
