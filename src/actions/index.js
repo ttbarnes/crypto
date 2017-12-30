@@ -145,9 +145,11 @@ export const getUserData = (dispatch) => {
       dispatch(userDataSuccess(res.data.resUserObj)); 
     } else {
       dispatch(userDataError());
+      dispatch(logout());
     }
   }, () => {
     dispatch(userDataError());
+    dispatch(logout());
   });
 }
 
