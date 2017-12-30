@@ -64,7 +64,7 @@ header .col-left {
   display: flex;
 }
 
-.user-menu {
+.header-col-user {
   display: flex;
   align-items: center;
   > div {
@@ -75,7 +75,7 @@ header .col-left {
   }
 }
 
-.login-dropdown-overlay {
+.header-overlay {
   transition: all .3s ease;
   position: absolute;
   top: 0;
@@ -94,7 +94,7 @@ header .col-left {
   }
 }
 
-.login-dropdown {
+.login-form-container {
   z-index: 3;
   width: 100%;
   background: $color-black;
@@ -107,5 +107,35 @@ header .col-left {
   &.show {
     opacity: 1;
     margin-bottom: 0;
+  }
+}
+
+
+.user-dropdown {
+  opacity: 0;
+  transition: all .3s ease;
+  background: #111;
+  min-width: 170px;
+  text-align: right;
+  position: absolute;
+  top: 38px;
+  right: 0;
+  &.show {
+    opacity: 1;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+  }
+  ul li {
+    padding: 1em .7em;
+    font-size: .9em;
+    margin: 0;
+    cursor: pointer;
+    transition: all .3s ease;
+    &:hover {
+      background: #222;
+      color: #CCC;
+    }
   }
 }

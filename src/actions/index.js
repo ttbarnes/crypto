@@ -4,6 +4,7 @@ import {
   USER_SET_AUTH,
   USER_SIGNUP_SUCCESS,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT_SUCCESS,
   DESTORY_USER_SIGNUP_SUCCESS,
   USER_AUTH_ERROR,
   USER_DATA_SUCCESS,
@@ -29,6 +30,12 @@ export function setUserAuth(payload) {
 export function loginSuccess() {
   return {
     type: USER_LOGIN_SUCCESS
+  }
+}
+
+export function logoutSuccess() {
+  return {
+    type: USER_LOGOUT_SUCCESS
   }
 }
 
@@ -80,7 +87,6 @@ export function promiseExchangeError(payload) {
     payload
   }
 }
-
 
 export const authCheck = () => {
   return (dispatch, getState) => {
@@ -178,6 +184,13 @@ export const userLogin = () => {
       }, () => {
         dispatch(authError('Something is wrong'));
       });
+  }
+}
+
+export const logout = () => {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch(setUserAuth(false));
   }
 }
 

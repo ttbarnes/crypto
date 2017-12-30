@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
 import LoginForm from './LoginForm';
-import { authCheck } from '../../actions';
+import {
+  authCheck,
+  logout
+} from '../../actions';
 import './header.css';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDropDown: false
+      showLoginForm: false,
+      showUserDropDown: false
     };
   }
 
@@ -17,20 +22,33 @@ class Header extends Component {
     this.props.doAuthCheck();
   }
 
-  onToggle = () => {
+  onToggleLoginForm = () => {
     this.setState({
-      showDropDown: !this.state.showDropDown
+      showLoginForm: !this.state.showLoginForm
+    })
+  }
+ 
+  showUserDropDown = () => {
+    this.setState({
+      showUserDropDown: !this.state.showUserDropDown
     })
   }
 
+  handleOnLogout = () => {
+    this.props.onLogout();
+    this.props.history.push('/');
+  }
+ 
   render() {
     const {
       isAuth,
-      profile
+      profile,
+      onLogout
     } = this.props;
 
     const {
-      showDropDown
+      showLoginForm,
+      showUserDropDown
     } = this.state;
 
     return (
@@ -43,21 +61,35 @@ class Header extends Component {
             <li><Link to="move-funds">Move funds</Link></li>
           </ul>
         </div>
-        <div className="user-menu">
+        <div className="header-col-user">
           {isAuth ?
-            <small>Welcome {profile.username}</small>
+            <div>
+              <button
+                onClick={this.showUserDropDown}
+                className="button-plain">
+                Welcome {profile.username}
+              </button>
+              <div className={showUserDropDown ? 'user-dropdown show' : 'user-dropdown'}>
+                <ul>
+                  <li>Dummy item 1</li>
+                  <li>Dummy item 2</li>
+                  <li onClick={this.handleOnLogout}>Log out</li>
+                </ul>
+              </div>
+            </div>
           :
             <div>
               <li><Link to="sign-up" className="button">Sign up</Link></li>
               <li>
-                <button onClick={this.onToggle}>Login</button>
+                <button onClick={this.onToggleLoginForm}>Login</button>
               </li>
 
-              <div className={showDropDown ? 'login-dropdown-overlay show' : 'login-dropdown-overlay'}>
-                <div className={showDropDown ? 'login-dropdown show' : 'login-dropdown'}>
+              <div className={showLoginForm ? 'header-overlay show' : 'header-overlay'}>
+                <div className={showLoginForm ? 'login-form-container show' : 'login-form-container'}>
                   <LoginForm />
                 </div>
               </div>
+             
             </div>
           }
           </div>
@@ -74,10 +106,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  doAuthCheck: () => authCheck()
+  doAuthCheck: () => authCheck(),
+  onLogout: () => logout(),
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);

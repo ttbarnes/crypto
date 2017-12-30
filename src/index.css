@@ -108,6 +108,14 @@ button.block,
   width: 100%;
   margin-top: 1em; }
 
+.button-plain {
+  background: none;
+  padding: 0;
+  color: #FFF;
+  font-weight: 300; }
+  .button-plain:hover, .button-plain:focus {
+    background: none; }
+
 .main-container {
   padding-top: 4.75em;
   height: calc(100% - 40px); }
