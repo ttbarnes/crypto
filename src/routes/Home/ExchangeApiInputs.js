@@ -91,19 +91,29 @@ class ExchangeApiInputs extends Component {
 
               {(exchangePromise && exchangePromise.exchange === e.exchange) &&
                 <div>
-                  {exchangePromise.isLoading && <p>LOADING</p>}
-                  {exchangePromise.hasError && <p>Error :(</p>}
-                  {exchangePromise.isSuccess && <p>Success!</p>}
+                  {exchangePromise.isLoading &&
+                    <div className="exchange-input-box-promise-state-overlay">
+                      <p style={{ opacity: '.8' }}><small>Connecting antimatter particles</small></p>
+                      <div className="loader" />
+                    </div>
+                  }
+                  {exchangePromise.hasError &&
+                    <div className="exchange-input-box-promise-state-overlay"><p>Error :(</p></div>
+                  }
+                  {exchangePromise.isSuccess &&
+                    <div className="exchange-input-box-promise-state-overlay"><p>Success! 🚀</p></div>
+                  }
                 </div>
               }
+              
 
               <h3>{e.exchange}</h3>
 
               {this.userExchangeExists(e.exchange) ? 
                 <div>
                   <p>Already integrated, awesome! 😊 🎉</p>
-                  <p style={{ opacity: ".5" }}><small>API key: {this.getUserExchange(e.exchange).key}</small></p>
-                  <p style={{ opacity: ".5" }}><small>API secret: {this.getUserExchange(e.exchange).secret}</small></p>
+                  <p><small>API key: {this.getUserExchange(e.exchange).key}</small></p>
+                  <p><small>API secret: {this.getUserExchange(e.exchange).secret}</small></p>
                 </div>
               :
                 <div>
