@@ -12,95 +12,32 @@ class Trades extends Component {
     super(props);
     this.state = {
       setCurrency: 'GBP',
-      coinList: ['bitcoin', 'tron', 'iota', 'ethereum', 'ripple']
+      coinList: ['bitcoin', 'tron', 'iota', 'ethereum', 'ripple'],
     };
+    this.getCMCData();
   }
 
+  // Move to redux action at some point
   getCMCData = () => {
-    const params = {
-      name: exchange.name,
-      secret: exchange.apiSecret,
-      key: exchange.apiKey
-    };
+    const setCurrency = this.state;
 
-    if (isBitfinex(exchange.name)) {
-      const url = new URL(API_ROOT);
-      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+    const url = new URL(`${CMC_BASE}?convert=${setCurrency}`);
 
-      fetch(url).then(res => res.json()).then((data) => {
-        this.setState({
-          bitfinexData: data
-        });
+    fetch(url).then(res => res.json()).then((data) => {
+      this.setState({
+        coinMarketCapData: data
       });
-    } else if (isBittrex(exchange.name)) {
-      const url = new URL(API_ROOT_BITTREX);
-      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-
-      fetch(url).then(res => res.json()).then((data) => {
-        this.setState({
-          bittrexData: data
-        });
-      });
-    } else if (isGDAX(exchange.name)) {
-      const url = new URL(API_ROOT_GDAX);
-      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-
-      fetch(url).then(res => res.json()).then((data) => {
-        this.setState({
-          gdaxData: data
-        });
-      });
-    }
+      console.log(data);
+    });
   }
  
   render() {
-    const {
-      bitfinexData,
-      bittrexData
-    } = this.state;
-
     return (
       <div className="App">
-        <h2>Balances</h2>
-
-        <div className="balances-input-container">
-          {!bitfinexData.length && <p><small>Connect with an exchange to get your balances</small></p>}
-
-          {bitfinexData.length ? (
-            <div>
-              <h5>Bitfinex Balances</h5>
-              <ul>
-                {bitfinexData.map((d) =>
-                  <li key={d.currency}>
-                    <b>{d.currency.toUpperCase()}</b>: {d.amount}
-                  </li>
-                )}
-              </ul>
-            </div>
-          ) : null}
-
-          {bittrexData.result ? (
-            <div>
-              <h5>Bittrex Balances</h5>
-              {bittrexData.result === [] &&
-                <div>0 monies - empty</div>
-              }
-              {(bittrexData && bittrexData.result && bittrexData.result.length) &&
-                <ul>
-                  {bittrexData.result.map((d) =>
-                    <li key={d.currency}>
-                      <b>{d.currency.toUpperCase()}</b>: {d.amount}
-                    </li>
-                  )}
-                </ul>
-              }
-            </div>
-          ) : null}
-        </div>
-       
+        <h2>Trades</h2>   
       </div>
     )
   };
 }
 
-export default Balances;
+export default Trades;

@@ -8,6 +8,7 @@ import Integrations from './routes/Integrations';
 import Balances from './routes/Balances';
 import MoveFunds from './routes/MoveFunds';
 import SignUp from './routes/SignUp';
+import Trades from './routes/Trades';
 import './index.css';
 
 // for protected auth routes see
@@ -24,6 +25,7 @@ const Router = () => (
           <Route exact path='/balances' component={Balances} />
           <Route exact path='/move-funds' component={MoveFunds} />
           <Route exact path='/sign-up' component={SignUp} />
+          <Route exact path='/trades' component={Trades} />
         </Switch>
       </div>
     </div>
