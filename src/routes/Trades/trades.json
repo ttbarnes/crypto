@@ -1,0 +1,34 @@
+[
+  {
+    "tradeId": 1,
+    "type": "buy",
+    "from": "GBP",
+    "currencyAmount": "584",
+    "to": "ETH",
+    "coinAmount": "2.28736310"
+  },
+  {
+    "tradeId": 2,
+    "type": "buy",
+    "from": "ETH",
+    "currencyAmount": "2.28736310",
+    "to": "TRX",
+    "coinAmount": "32230"
+  },
+  {
+    "tradeId": 3,
+    "type": "sell",
+    "from": "TRX",
+    "currencyAmount": "32230",
+    "to": "BTC",
+    "coinAmount": "0.07856067"
+  },
+  {
+    "tradeId": 4,
+    "type": "buy",
+    "from": "BTC",
+    "currencyAmount": "0.07847514",
+    "to": "REQ",
+    "coinAmount": "3263"
+  }
+]
